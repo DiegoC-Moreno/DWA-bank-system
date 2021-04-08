@@ -7,7 +7,7 @@ namespace PracticaClass
 {
     public class Cuenta
     {
-        public string nombre;
+        private string nombre;
         private string nCuenta;
         private DateTime fExpiracion;
         private double saldo,cantidadRetirado;
@@ -73,7 +73,8 @@ namespace PracticaClass
       
         public Cuenta()
         {
-
+            historial = new Dictionary<DateTime, string>();
+            activaCuenta = true;
         }
 
         //public Cuenta(string nombre, string nCuenta, DateTime fExpiracion, double saldo) {
@@ -84,12 +85,12 @@ namespace PracticaClass
         //    this.historial = new Dictionary<DateTime, string>();
         //}
 
-        public void retiro(double cantidad, DateTime fecha) {
-            if (fecha < DateTime.Now)
+        public void retiro(double cantidad) {
+            if (fExpiracion > DateTime.Now)
             {
-                if (cantidad < 400 && cantidad < saldo)
+                if (cantidad < 400)
                 {
-                    if (cantidad < 1)
+                    if (saldo > 1)
                     {
                         if (cantidadRetirado <= 1000)
                         {
@@ -107,9 +108,9 @@ namespace PracticaClass
             }
         }
 
-        public void abono(double cantidad, DateTime fecha)
+        public void abono(double cantidad)
         {
-            if (fecha < DateTime.Now && activaCuenta)
+            if (fExpiracion > DateTime.Now)
             {
                 this.saldo += cantidad;
                 historial.Add(DateTime.Now, "Se realizo un abono de: $" + cantidad);
@@ -120,11 +121,11 @@ namespace PracticaClass
             }
         }
 
-        public String CalcInteres(int dias, int interes)
+        public String CalcInteres(int dias, int interes, double monto)
         {
             if (activaCuenta == true)
             {
-                return (((saldo * interes * dias) / 365) / 12).ToString();
+                return Math.Round((((monto * interes * dias) / 365) / 12),2).ToString();
             }
             else {
                 return "su cuenta no esta activa";
@@ -141,7 +142,7 @@ namespace PracticaClass
                         this.historial.Add(DateTime.Now, "Se realizo un cobro de cheques de un total de $" + monto);
                         break;
                     case "pago a cuenta de luz":
-                        this.saldo += monto;
+                        this.saldo -= monto;
                         this.historial.Add(DateTime.Now, "Se realizo un pago a cuenta de luz de un total de $" + monto);
                         break;
                     case "transferencia":

@@ -35,9 +35,9 @@
             <br />
             <asp:TextBox ID="monto" runat="server" />
             <asp:Button Text="Retiro" CssClass="btn btn-outline-danger rounded" ID="RetiroBtn" runat="server" OnClick="RetiroBtn_Click" />
-            &nbsp;<asp:Button Text="Abono" CssClass="btn btn-outline-success rounded"  ID ="AbonoBtn" runat="server" />
+            &nbsp;<asp:Button Text="Abono" CssClass="btn btn-outline-success rounded"  ID ="AbonoBtn" runat="server" OnClick="AbonoBtn_Click1" />
             &nbsp;<asp:Label CssClass="dropdown-menu" Text="Otro movimiento" runat="server" />
-            <asp:DropDownList runat="server">
+            <asp:DropDownList  ID="transacciones" runat="server">
                 <asp:ListItem Text="cobro de cheques" />
                 <asp:ListItem Text="pago a cuenta de luz" />
                 <asp:ListItem Text="Transferencia" />
@@ -54,22 +54,44 @@
             <br />
             <br />
             Nombre :&nbsp;
-              Nombre :&nbsp;
+            
             <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
             <br />
             saldo:&nbsp;<asp:Label ID="saldo" Text="$0.00"  runat="server" />
             <br />
+            numero de Cuenta:
+            <asp:Label ID="Cuentalbl" runat="server" Text="Label"></asp:Label>
+            <br />
+            fecha de vencimiento:<asp:Label ID="fechaVencimiento" runat="server" Text="Label"></asp:Label>
+            <br />
+            <br />
+            Monto:
+            <asp:TextBox ID="montoInteres" runat="server"></asp:TextBox>
+            <br />
+            tiempo<asp:DropDownList ID="tiempo" runat="server">
+                <asp:ListItem>dia</asp:ListItem>
+                <asp:ListItem>mes </asp:ListItem>
+                <asp:ListItem>año</asp:ListItem>
+            </asp:DropDownList>
+&nbsp; <asp:Label Text="cantidad" runat="server" />:
+            <asp:TextBox ID="cantidadDays" runat="server" Width="57px"></asp:TextBox>
+            &nbsp;
+            <br />
             <asp:Label Text="Interes:" runat="server" />
-            &nbsp;<asp:TextBox ID="Interes" runat="server" />
+            &nbsp;<asp:TextBox ID="Interes" runat="server" Width="188px" />
 
+            <asp:Button CssClass="btn btn-outline-info rounded" ID="Button2" runat="server" Text="Button" Width="59px" OnClick="Button2_Click" />
+
+            <br />
+            <asp:Label ID="calcInteres" Text="Calculo de interes es de: " runat="server" />
         </div>
         <br />
         <div class="container border border-dark p-3 my-3">
             <asp:Label CssClass="text-center h3" Text="Historial de acciones" runat="server" />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Height="64px" Width="151px">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Height="64px" Width="335px">
                 <Columns>
-                    <asp:BoundField HeaderText="Fecha y Hora" />
-                    <asp:BoundField HeaderText="accion" />
+                    <asp:BoundField HeaderText="Fecha y Hora" DataField="Fecha y hora" />
+                    <asp:BoundField HeaderText="accion" DataField="accion" />
                 </Columns>
         </asp:GridView>
         </div>
